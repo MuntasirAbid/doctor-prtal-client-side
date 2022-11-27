@@ -24,7 +24,7 @@ const ContactUs = () => {
                         </div>
                         <div className="form-control">
 
-                            <input style={{ width: "450px" }} type="text" placeholder="Subject" className="input input-bordered " />
+                            <input type="text" placeholder="Subject" className="input input-bordered " />
                         </div>
 
                         <textarea style={{ height: "136px" }} className="textarea textarea-bordered" placeholder="Your message"></textarea>
