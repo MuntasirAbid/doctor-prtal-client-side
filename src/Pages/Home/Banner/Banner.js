@@ -3,19 +3,15 @@ import img from '../../../assets/images/chair.png';
 
 const Banner = () => {
     return (
-        <div className="card lg:card-side bg-base-100 shadow-xl">
-
-            <figure><img src={img} alt="" /></figure>
-
-            <div className="card-body">
-
-                <h1 className='text-5xl font-bold'>Your New Smile Starts <br />Here</h1>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the</p>
-                <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Get Started</button>
+        <div className="hero min-h-screen">
+            <div className="hero-content flex-col lg:flex-row-reverse">
+                <img src={img} className="rounded-lg lg:w-1/2 shadow-2xl" alt='' />
+                <div>
+                    <h1 className="text-5xl font-bold">Box Office News!</h1>
+                    <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+                    <button className="btn btn-primary bg-gradient-to-r from-primary to-secondary text-white">Get Started</button>
                 </div>
             </div>
-
         </div>
     );
 };
