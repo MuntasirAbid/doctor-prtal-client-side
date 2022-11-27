@@ -44,13 +44,17 @@ const Services = () => {
             </div>
 
 
-            <div className="card lg:card-side bg-base-100 shadow-xl mt-20 mx-20">
-                <figure><img src={treatmentImg} alt="Album" /></figure>
-                <div className="card-body">
-                    <h2 className="card-title">New album is released!</h2>
-                    <p>Click the button to listen on Spotiwhy app.</p>
-                    <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Listen</button>
+            <div className="hero">
+                <div className="hero-content flex-col lg:flex-row bg-base-100 my-16">
+
+                    < img src={treatmentImg} alt="Album" className='rounded-xl' />
+
+                    <div className="card-body">
+                        <h2 className="card-title text-5xl font-bold mt-20">Exceptional Dental <br /> Care, on Your Terms</h2>
+                        <p className='mt-8'>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point <br /> of using Lorem Ipsumis that it has a more-or-less normal <br /> distribution of letters,as opposed to using 'Content here, <br /> content here', making it look like readable English. Many desktop publishing packages and web page</p>
+                        <div className="card-actions justify-start">
+                            <button className="btn btn-primary bg-gradient-to-r from-primary to-secondary">Get Started</button>
+                        </div>
                     </div>
                 </div>
             </div>
