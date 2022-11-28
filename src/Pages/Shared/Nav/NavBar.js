@@ -4,7 +4,13 @@ import { authContext } from '../../../Contexts/AuthProvider';
 
 const NavBar = () => {
 
-    const { user } = useContext(authContext);
+    const { user, logOut } = useContext(authContext);
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(error => console.log(error));
+    }
 
     const menuItems = <React.Fragment>
 
@@ -14,7 +20,7 @@ const NavBar = () => {
 
 
         {user?.uid ?
-            <li><Link to="/signout">Sign Out</Link></li>
+            <li><button onClick={handleLogOut}>Sign Out</button></li>
             :
             <li><Link to="/login">Login</Link></li>
         }
