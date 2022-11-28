@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { authContext } from '../../Contexts/AuthProvider';
 
 const SignUp = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const { createUser } = useContext(authContext);
 
     const handleSignUp = (data) => {
-        console.log(data)
+        console.log(data);
+        createUser(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => console.log(error));
     }
 
     return (
@@ -41,7 +49,7 @@ const SignUp = () => {
 
                     </div>
 
-                    <input className='my-5 btn btn-accent w-full' value='Sign Up' type="submit" />
+                    <input className='mt-4 btn btn-accent w-full' value='Sign Up' type="submit" />
                 </form>
                 <p>Already have an account?<Link className='text-secondary' to='/login'>Please Login</Link></p>
                 <div className="divider">OR</div>
