@@ -29,7 +29,7 @@ const ContactUs = () => {
 
                         <textarea style={{ height: "136px" }} className="textarea textarea-bordered" placeholder="Your message"></textarea>
                         <div className="form-control mt-6">
-                            <button><PrimaryButton>Submit</PrimaryButton></button>
+                            <PrimaryButton>Submit</PrimaryButton>
                         </div>
 
                     </div>
