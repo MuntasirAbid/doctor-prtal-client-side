@@ -24,6 +24,7 @@ const ManageDoctors = () => {
                 return data;
             }
             catch (error) {
+
             }
         }
     })
@@ -44,10 +45,10 @@ const ManageDoctors = () => {
             })
     }
 
-
     if (isLoading) {
         <Loading></Loading>
     }
+
     return (
         <div>
             <h2 className='mb-9 font-bold'>Manage Doctors: {doctors?.length}</h2>
