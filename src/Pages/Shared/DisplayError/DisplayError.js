@@ -1,14 +1,17 @@
 import React, { useContext } from 'react';
-import { useRouteError } from 'react-router-dom';
+import { useNavigate, useRouteError } from 'react-router-dom';
 import { authContext } from '../../../Contexts/AuthProvider';
 
 const DisplayError = () => {
     const { logOut } = useContext(authContext);
-    const error = useRouteError()
+    const error = useRouteError();
+    const navigate = useNavigate();
 
     const handleLogOut = () => {
         logOut()
-            .then(() => { })
+            .then(() => {
+                navigate('/login');
+            })
             .catch(err => console.log(err))
     }
 
@@ -16,7 +19,7 @@ const DisplayError = () => {
         <div>
             <p className="text-red-500">Something wrong happened!!</p>
             <p className='text-red-500'>{error.statusText || error.message}</p>
-            <h4 className="text-3xl">Please <button onClick={handleLogOut}>Sign Out</button>and log back in</h4>
+            <h4 className="text-3xl">Please <button className='btn btn-sm btn-error' onClick={handleLogOut}>Sign Out</button> and log back in</h4>
         </div>
     );
 };
