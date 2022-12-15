@@ -1,8 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
+import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal';
 
 const AllUsers = () => {
+    const [deletingUsers, setDeletingUsers] = useState(null);
+    const closeModal = () => {
+        setDeletingUsers(null);
+    }
+
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
@@ -12,6 +18,23 @@ const AllUsers = () => {
         }
 
     })
+
+    const handleDeleteUser = user => {
+        fetch(`http://localhost:12000/users/${user._id}`, {
+            method: "DELETE",
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    refetch();
+                    toast.success(`User ${user.name} deleted successfully`)
+
+                }
+            })
+    }
 
     const handleMakeAdmin = id => {
         fetch(`http://localhost:12000/users/admin/${id}`, {
@@ -31,7 +54,7 @@ const AllUsers = () => {
 
     return (
         <div>
-            <h2 className='text-3xl'>All users</h2>
+            <h2 className='text-3xl mb-10 font-semibold'>All Users</h2>
 
             <div className="overflow-x-auto">
                 <table className="table w-full">
@@ -53,13 +76,27 @@ const AllUsers = () => {
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{user?.role !== 'admin' && <button onClick={() => handleMakeAdmin(user._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td>
-                                <td><button className='btn btn-xs btn-error'>Delete</button></td>
+                                <td>
+                                    <label onClick={() => setDeletingUsers(user)} htmlFor="confirmation-modal" className="btn btn-sm btn-error">Delete</label>
+
+                                </td>
                             </tr>)
                         }
 
                     </tbody>
                 </table>
             </div>
+            {
+                deletingUsers && <ConfirmationModal
+                    title={`Are you sure you want to delete?`}
+                    message={`If you delete ${deletingUsers.name}. You will not be able to recover any data!`}
+                    successAction={handleDeleteUser}
+                    successButtonName="Delete"
+                    modalData={deletingUsers}
+                    closeModal={closeModal}
+
+                ></ConfirmationModal>
+            }
         </div>
 
 

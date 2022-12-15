@@ -8,7 +8,7 @@ import useToken from '../../hooks/useToken';
 const SignUp = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { createUser, updateUser } = useContext(authContext);
+    const { createUser, updateUser, verifyEmail } = useContext(authContext);
     const [signUpError, setSignUpError] = useState();
     const [createdUserEmail, setCreatedUserEmail] = useState('')
     const [token] = useToken(createdUserEmail);
@@ -25,7 +25,19 @@ const SignUp = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                toast.success('User Created Successfully')
+                toast.success('User Created Successfully');
+                handleEmailVerification();
+                toast.success('Email verification send', {
+                    style: {
+                        border: '1px solid #713200',
+                        padding: '16px',
+                        color: '#713200',
+                    },
+                    iconTheme: {
+                        primary: '#713200',
+                        secondary: '#FFFAEE',
+                    },
+                });
                 const userInfo = {
                     displayName: data.name
                 }
@@ -39,6 +51,13 @@ const SignUp = () => {
                 console.log(error)
                 setSignUpError(error.message);
             });
+    }
+
+    const handleEmailVerification = () => {
+        verifyEmail()
+            .then(() => { })
+            .catch(error => console.error(error))
+
     }
 
     const saveUser = (name, email) => {
