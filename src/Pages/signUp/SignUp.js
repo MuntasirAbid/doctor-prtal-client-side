@@ -62,7 +62,7 @@ const SignUp = () => {
 
     const saveUser = (name, email) => {
         const user = { name, email };
-        fetch('http://localhost:12000/users', {
+        fetch('https://doctors-portal-server-side-nine.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

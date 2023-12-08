@@ -13,7 +13,7 @@ const CheckOutForm = ({ booking }) => {
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-        fetch("http://localhost:12000/create-payment-intent", {
+        fetch("https://doctors-portal-server-side-nine.vercel.app/create-payment-intent", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -38,7 +38,7 @@ const CheckOutForm = ({ booking }) => {
             return;
         }
 
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
+        const { error } = await stripe.createPaymentMethod({
             type: 'card',
             card,
         });
@@ -70,7 +70,7 @@ const CheckOutForm = ({ booking }) => {
             return;
         }
         if (paymentIntent.status === 'succeeded') {
-            console.log('card info', card)
+
             //store payment info in the database
             const payment = {
                 price,
@@ -78,7 +78,7 @@ const CheckOutForm = ({ booking }) => {
                 email,
                 bookingId: _id
             }
-            fetch('http://localhost:12000/payments', {
+            fetch('https://doctors-portal-server-side-nine.vercel.app/payments', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',
@@ -88,7 +88,7 @@ const CheckOutForm = ({ booking }) => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data)
+
                     if (data.insertedId) {
                         setSuccess('Congrats! Your payment completed');
                         setTransactionId(paymentIntent.id);
@@ -96,7 +96,7 @@ const CheckOutForm = ({ booking }) => {
                 })
         }
         setProcessing(false);
-        console.log('paymentIntent', paymentIntent)
+
     }
 
     return (

@@ -12,7 +12,7 @@ const AllUsers = () => {
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:12000/users');
+            const res = await fetch('https://doctors-portal-server-side-nine.vercel.app/users');
             const data = await res.json();
             return data;
         }
@@ -20,7 +20,7 @@ const AllUsers = () => {
     })
 
     const handleDeleteUser = user => {
-        fetch(`http://localhost:12000/users/${user._id}`, {
+        fetch(`https://doctors-portal-server-side-nine.vercel.app/users/${user._id}`, {
             method: "DELETE",
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -37,7 +37,7 @@ const AllUsers = () => {
     }
 
     const handleMakeAdmin = id => {
-        fetch(`http://localhost:12000/users/admin/${id}`, {
+        fetch(`https://doctors-portal-server-side-nine.vercel.app/users/admin/${id}`, {
             method: 'PUT',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -75,7 +75,7 @@ const AllUsers = () => {
                                 <th>{i + 1}</th>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
-                                <td>{user?.role !== 'admin' && <button onClick={() => handleMakeAdmin(user._id)} className='btn btn-xs btn-primary'>Make Admin</button>}</td>
+                                <td>{user?.role !== 'admin' ? <button onClick={() => handleMakeAdmin(user._id)} className='btn btn-xs btn-primary'>Make Admin</button> : <span className='text-green-900'>admin</span>}</td>
                                 <td>
                                     <label onClick={() => setDeletingUsers(user)} htmlFor="confirmation-modal" className="btn btn-sm btn-error">Delete</label>
 

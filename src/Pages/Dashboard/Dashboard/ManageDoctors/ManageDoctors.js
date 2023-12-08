@@ -15,7 +15,7 @@ const ManageDoctors = () => {
         queryKey: ['doctors'],
         queryFn: async () => {
             try {
-                const res = await fetch('http://localhost:12000/doctors', {
+                const res = await fetch('https://doctors-portal-server-side-nine.vercel.app/doctors', {
                     headers: {
                         authorization: `bearer ${localStorage.getItem("accessToken")}`
                     }
@@ -30,7 +30,7 @@ const ManageDoctors = () => {
     })
 
     const handleDeleteDoctor = doctor => {
-        fetch(`http://localhost:12000/doctors/${doctor._id}`, {
+        fetch(`https://doctors-portal-server-side-nine.vercel.app/doctors/${doctor._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -73,7 +73,7 @@ const ManageDoctors = () => {
                                 <td>
                                     <div className="avatar">
                                         <div className="w-24 rounded-full">
-                                            <img src={doctor.image} />
+                                            <img src={doctor.image} alt='' />
                                         </div>
                                     </div>
                                 </td>
